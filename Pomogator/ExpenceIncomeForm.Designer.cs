@@ -415,12 +415,12 @@ namespace Pomogator
 			// 
 			this.toolStripComboBox_DefaultCoin.Name = "toolStripComboBox_DefaultCoin";
 			this.toolStripComboBox_DefaultCoin.Size = new System.Drawing.Size(121, 23);
-			//this.toolStripComboBox_DefaultCoin.TextUpdate += new System.EventHandler(this.toolStripComboBox_DefaultCoin_TextUpdate);
 			this.toolStripComboBox_DefaultCoin.TextChanged += new System.EventHandler(this.toolStripComboBox_DefaultCoin_TextChanged);
 			// 
 			// toolStripTextBox_search
 			// 
 			this.toolStripTextBox_search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.toolStripTextBox_search.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.toolStripTextBox_search.Name = "toolStripTextBox_search";
 			this.toolStripTextBox_search.Size = new System.Drawing.Size(200, 23);
 			this.toolStripTextBox_search.Enter += new System.EventHandler(this.toolStripTextBox_search_Enter);

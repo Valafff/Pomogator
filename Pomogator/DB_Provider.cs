@@ -128,15 +128,16 @@ namespace Pomogator
 		//Запись позиции в БД.
 		public bool addPositionToDB(Position inputPos)
 		{
-			string income = inputPos.income.ToString(), expence = inputPos.expence.ToString(), saldo = inputPos.saldo.ToString();
-			income.Replace(',', '.');
-			expence.Replace(',', '.');
-			saldo.Replace(',', '.');
+			//Неактуально, лечится в dotTocommaRepair()
+			//string income = inputPos.income.ToString(), expence = inputPos.expence.ToString(), saldo = inputPos.saldo.ToString();
+			//income =income.Replace(',', '.');
+			//expence = expence.Replace(',', '.');
+			//saldo = saldo.Replace(',', '.');
 
 			// текст запроса
 			string query = $"INSERT INTO Positions (myKey, openDate, closeDate, kind, category, income, expence, lotCount, currCoin, saldo, status, tag, notes)" +
-			$" VALUES ({inputPos.myKey}, '{inputPos.openDate}', '{inputPos.closeDate}', '{inputPos.kind}', '{inputPos.category}', '{income}', '{expence}', " +
-			$"{inputPos.lotCount}, '{inputPos.currCoin}', '{saldo}', '{inputPos.status}', '{inputPos.tag}','{inputPos.notes}')";
+			$" VALUES ({inputPos.myKey}, '{inputPos.openDate}', '{inputPos.closeDate}', '{inputPos.kind}', '{inputPos.category}', '{inputPos.income}', '{inputPos.expence}', " +
+			$"{inputPos.lotCount}, '{inputPos.currCoin}', '{inputPos.saldo}', '{inputPos.status}', '{inputPos.tag}','{inputPos.notes}')";
 			// создаем объект OleDbCommand для выполнения запроса к БД MS Access
 			OleDbCommand command = new OleDbCommand(query, DBConnection);
 			try
@@ -200,8 +201,14 @@ namespace Pomogator
 		public bool updatePosition(Position pos)
 		{
 
+
+			string income = pos.income.ToString(), expence = pos.expence.ToString(), saldo = pos.saldo.ToString();
+			income = income.Replace(',', '.');
+			expence = expence.Replace(',', '.');
+			saldo = saldo.Replace(',', '.');
+
 			string query = $"UPDATE Positions SET myKey = {pos.myKey}, openDate = '{pos.openDate}', closeDate ='{pos.closeDate}', kind = '{pos.kind}'," +
-				$" category = '{pos.category}', income = {pos.income}, expence = {pos.expence}, lotCount = {pos.lotCount}, currCoin = '{pos.currCoin}', saldo = {pos.saldo}," +
+				$" category = '{pos.category}', income = {income}, expence = {expence}, lotCount = {pos.lotCount}, currCoin = '{pos.currCoin}', saldo = {saldo}," +
 				$" status = '{pos.status}', tag = '{pos.tag}', notes = '{pos.notes}' WHERE key = {pos.key}";
 			OleDbCommand command = new OleDbCommand(query, DBConnection);
 			try

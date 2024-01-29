@@ -49,6 +49,7 @@ namespace Pomogator
 			//Обновление даты
 			dateTimePickerEnd.Value = DateTime.Now;
 			dateTimePickerStart.Value = new DateTime(dateTimePickerEnd.Value.Year, 01, 01, 00, 00, 00);
+			//dateTimePickerStart.Value = new DateTime(2019, 01, 01, 00, 00, 00);
 
 			//Первоначальное чтение данных из таблицы
 			btn_refreshDataGrid_Click(this, null);
@@ -84,7 +85,6 @@ namespace Pomogator
 				if (comboBox_Kind.Text == item.kind)
 				{
 					comboBox_Category.Text = item.category;
-					//Показала контрпродуктивность
 					if (item.type == "expence")
 					{
 						textBox_Income.Text = "0";

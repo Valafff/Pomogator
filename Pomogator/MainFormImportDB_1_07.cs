@@ -19,7 +19,7 @@ namespace Pomogator
 			}
 			else
 			{
-                Console.WriteLine("fail");
+                //Console.WriteLine("fail");
             }
 			provider.closeConnection();
 		}
