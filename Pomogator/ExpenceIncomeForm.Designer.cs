@@ -420,7 +420,6 @@ namespace Pomogator
 			// toolStripTextBox_search
 			// 
 			this.toolStripTextBox_search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.toolStripTextBox_search.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.toolStripTextBox_search.Name = "toolStripTextBox_search";
 			this.toolStripTextBox_search.Size = new System.Drawing.Size(200, 23);
 			this.toolStripTextBox_search.Enter += new System.EventHandler(this.toolStripTextBox_search_Enter);
@@ -475,6 +474,7 @@ namespace Pomogator
 			this.textBox_notes.Location = new System.Drawing.Point(3, 16);
 			this.textBox_notes.Multiline = true;
 			this.textBox_notes.Name = "textBox_notes";
+			this.textBox_notes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBox_notes.Size = new System.Drawing.Size(472, 101);
 			this.textBox_notes.TabIndex = 9;
 			// 

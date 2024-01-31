@@ -147,7 +147,8 @@ namespace Pomogator
 					string[] temptime = timeNow.Split(':');
 					string time = temptime[0] + "h" + temptime[1] + "m" + temptime[2] + "sec";
 					timeNow = timeNow.Replace(':', '_');
-					File.Copy(mainIni.pathDB, $"{folderBrowserDialog_BackUp.SelectedPath}\\backup_{time}_{tempFileName}", true);
+					File.Copy(mainIni.pathDB, $"{folderBrowserDialog_BackUp.SelectedPath}\\backup_{dateNow}_{time}_{tempFileName}", true);
+					MessageBox.Show("Резервная копия создана", "Резервная копия", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
 			}
 			catch (Exception)
