@@ -101,11 +101,12 @@ namespace Pomogator
 			}
 		}
 
-		//Получение листа данных валютных пар
-		public List<CurrencyPair> CurrencyPairReader()
+		//Получение листа данных валют
+		public List<Currency> CurrencyNameReader()
 		{
-			List<CurrencyPair> tempCurrPair = new List<CurrencyPair>();
-			string query = "SELECT key, addDate, currencyPairName, shortPairName, currency_1, currency_2, ratio FROM currencyPair";
+			//ASC - сортировка от меньшего к большему
+			List<Currency> tempCurrPair = new List<Currency>();
+			string query = "SELECT key, addDate, currencyPairName, shortPairName FROM coins ORDER BY key ASC";
 			OleDbCommand command = new OleDbCommand(query, DBConnection);
 
 			try
@@ -113,7 +114,7 @@ namespace Pomogator
 				OleDbDataReader reader = command.ExecuteReader();
 				while (reader.Read())
 				{
-					CurrencyPair temp = new CurrencyPair(Convert.ToUInt32(reader[0]), Convert.ToDateTime(reader[1]), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), Convert.ToDecimal(reader[6]));
+					Currency temp = new Currency(Convert.ToUInt32(reader[0]), Convert.ToDateTime(reader[1]), reader[2].ToString(), reader[3].ToString());
 					tempCurrPair.Add(temp);
 				}
 				return tempCurrPair;
@@ -124,6 +125,66 @@ namespace Pomogator
 				return null;
 			}
 		}
+
+		//Запись валюты в БД
+		public uint addCurrencyNameToDB(Currency currency)
+		{
+			string query = $"INSERT INTO coins (addDate, currencyPairName, shortPairName) VALUES ('{currency.date}', '{currency.currencyName}', '{currency.shortCurrencyName}')";
+			OleDbCommand command = new OleDbCommand(query, DBConnection);
+			try
+			{
+				command.ExecuteNonQuery();
+
+				////string query2 = "SELECT MAX(key) FROM coins";
+				string query2 = $"SELECT key FROM coins WHERE currencyPairName ='{currency.currencyName}'";
+				OleDbCommand command2 = new OleDbCommand(query2, DBConnection);
+				return Convert.ToUInt32(command2.ExecuteScalar().ToString());
+			}
+			catch (Exception)
+			{
+				return 0;
+			}
+		}
+
+		//Обновление записи о валюте
+		public uint updateCurrency(Currency curr)
+		{
+			string query = $"UPDATE coins SET addDate = '{curr.date}', currencyPairName ='{curr.currencyName}', shortPairName = '{curr.shortCurrencyName}' WHERE key = {curr.key}";
+			OleDbCommand command = new OleDbCommand(query, DBConnection);
+			try
+			{
+				command.ExecuteNonQuery();
+
+				//string query2 = "SELECT MAX(key) FROM coins";
+				//string query2 = $"SELECT key FROM coins WHERE currencyPairName ='{curr.currencyName}'";
+				//OleDbCommand command2 = new OleDbCommand(query2, DBConnection);
+				//return Convert.ToUInt32(command2.ExecuteScalar().ToString());
+				return curr.key;
+
+			}
+			catch (Exception)
+			{
+				return 0;
+			}
+		}
+
+		//Удаление записи о валюте
+		public bool deleteCurrency(Currency curr)
+		{
+			string query = $"DELETE FROM coins WHERE key = {curr.key}";
+			OleDbCommand command = new OleDbCommand(query, DBConnection);
+			try
+			{
+				command.ExecuteNonQuery();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+
 
 		//Запись позиции в БД.
 		public bool addPositionToDB(Position inputPos)

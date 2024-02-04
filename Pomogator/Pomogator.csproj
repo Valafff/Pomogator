@@ -77,6 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainForm\EditDBCoinsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\EditDBCoinsForm.Designer.cs">
+      <DependentUpon>EditDBCoinsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Source\DB_Provider.cs" />
     <Compile Include="IncomeAndExpense\ExpenceIncomeForm.cs">
       <SubType>Form</SubType>
@@ -117,6 +123,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="IncomeAndExpense\ExpenceIncomeForm.resx">
       <DependentUpon>ExpenceIncomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\EditDBCoinsForm.resx">
+      <DependentUpon>EditDBCoinsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

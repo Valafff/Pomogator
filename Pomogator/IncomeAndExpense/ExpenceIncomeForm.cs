@@ -14,6 +14,7 @@ namespace Pomogator
 {
 	public partial class ExpenceIncomeForm : Form
 	{
+		Pomogator_MainForm parrent;
 		public ExpenceIncomeForm(Pomogator_MainForm parrent)
 		{
 			InitializeComponent();
@@ -27,24 +28,24 @@ namespace Pomogator
 			//Блок чтения данных из БД
 			provider.openConnection(parrent.getPass(), parrent.mainIni.pathDB);
 			parrent.IncomeExpenceData = provider.IEDataListRead();
-			parrent.CurrencyPairs = provider.CurrencyPairReader();
+			parrent.CurrencyNames = provider.CurrencyNameReader();
 			parrent.maxMyKey = provider.getMyKeyMax();
 			provider.closeConnection();
 
 			//Заполнение combobox формы ExpenceIncomeForm
 			write_Category_fromIEListToComboBox(comboBox_Category, parrent.IncomeExpenceData);
 			write_Kind_fromIEListToComboBox(comboBox_Kind, parrent.IncomeExpenceData);
-			write_CurrencyPair_fromCurrencyPairListToCombobox(comboBox_CoinPair, parrent.CurrencyPairs);
+			write_CurrencyPair_fromCurrencyPairListToCombobox(comboBox_Coins, parrent.CurrencyNames);
 
 			//Блок автозаполнения комбобокс
 			AutoCompleteTextInComboBox(comboBox_Kind);
 			AutoCompleteTextInComboBox(comboBox_Category);
-			AutoCompleteTextInComboBox(comboBox_CoinPair);
+			AutoCompleteTextInComboBox(comboBox_Coins);
 			AutoCompleteTextInComboBox(comboBox_positionStatus);
 			AutoCompleteTextInComboBox(toolStripComboBox_CategorySearch);
 
 			//Получение валюты по умолчанию
-			comboBox_CoinPair.Text = parrent.mainIni.defaultCoin;
+			comboBox_Coins.Text = parrent.mainIni.defaultCoin;
 
 			//Обновление даты
 			dateTimePickerEnd.Value = DateTime.Now;
@@ -54,7 +55,7 @@ namespace Pomogator
 			//Первоначальное чтение данных из таблицы
 			btn_refreshDataGrid_Click(this, null);
 
-            foreach (var item in bufferPositionsList)
+			foreach (var item in bufferPositionsList)
 			{
 				bufferPositionsListOriginal.Add((Position)item.Clone());
 			}
@@ -201,7 +202,7 @@ namespace Pomogator
 					//Всегда прибавляется 1 к максимальному значению myKey
 					bufferPosition = new Position(0, provider.getMyKeyMax() + (uint)AddID.simplPosition, dateTimePicker_open.Value, source.getCloseDateFromForm(comboBox_positionStatus),/*дата закрытия*/
 					 comboBox_Kind.Text, comboBox_Category.Text, Convert.ToDecimal(textBox_Income.Text),
-					 Convert.ToDecimal(textBox_Expence.Text), Convert.ToUInt32(numericUpDown_numberLots.Value), comboBox_CoinPair.Text,
+					 Convert.ToDecimal(textBox_Expence.Text), Convert.ToUInt32(numericUpDown_numberLots.Value), comboBox_Coins.Text,
 					 source.getSaldoFromForm(Convert.ToDecimal(textBox_Income.Text), Convert.ToDecimal(textBox_Expence.Text)), /*сальдо*/
 					 comboBox_positionStatus.Text, tb_tag.Text, textBox_notes.Text);
 
@@ -240,7 +241,7 @@ namespace Pomogator
 					//Всегда прибавляется 0 к максимальному значению myKey
 					bufferPosition = new Position(0, bufferPosition.myKey, dateTimePicker_open.Value, source.getCloseDateFromForm(comboBox_positionStatus),/*дата закрытия*/
 					 comboBox_Kind.Text, comboBox_Category.Text, Convert.ToDecimal(textBox_Income.Text),
-					 Convert.ToDecimal(textBox_Expence.Text), Convert.ToUInt32(numericUpDown_numberLots.Value), comboBox_CoinPair.Text,
+					 Convert.ToDecimal(textBox_Expence.Text), Convert.ToUInt32(numericUpDown_numberLots.Value), comboBox_Coins.Text,
 					 source.getSaldoFromForm(Convert.ToDecimal(textBox_Income.Text), Convert.ToDecimal(textBox_Expence.Text)), /*сальдо*/
 					 comboBox_positionStatus.Text, tb_tag.Text, textBox_notes.Text);
 
@@ -447,7 +448,7 @@ namespace Pomogator
 				//textBox_Income.Text = "0";
 				//textBox_Expence.Text = "0";
 				numericUpDown_numberLots.Value = positionFromDataGrid.lotCount;
-				comboBox_CoinPair.Text = bufferPosition.currCoin;
+				comboBox_Coins.Text = bufferPosition.currCoin;
 				comboBox_positionStatus.Text = bufferPosition.status;
 				tb_tag.Text = bufferPosition.tag;
 				textBox_notes.Text = bufferPosition.notes;
@@ -503,7 +504,7 @@ namespace Pomogator
 					bufferPosition.income = Convert.ToDecimal(textBox_Income.Text);
 					bufferPosition.expence = Convert.ToDecimal(textBox_Expence.Text);
 					bufferPosition.lotCount = Convert.ToUInt32(numericUpDown_numberLots.Value);
-					bufferPosition.currCoin = comboBox_CoinPair.Text;
+					bufferPosition.currCoin = comboBox_Coins.Text;
 					//проверка можно ли закрыть комплексную позицию
 					if (isAllReadyClosed && comboBox_positionStatus.Text == "закрыта")
 					{
@@ -663,7 +664,18 @@ namespace Pomogator
 			if (toolStripComboBox_DefaultCoin.SelectedIndex != -1)
 			{
 				parrent.reWriteDefaultCoin(toolStripComboBox_DefaultCoin.Items[toolStripComboBox_DefaultCoin.SelectedIndex].ToString());
-				comboBox_CoinPair.Text = toolStripComboBox_DefaultCoin.Text;
+				comboBox_Coins.Text = toolStripComboBox_DefaultCoin.Text;
+			}
+
+		}
+
+		private void comboBox_CoinPair_DropDown(object sender, EventArgs e)
+		{
+			if (comboBox_Coins.Items.Count != parrent.CurrencyNames.Count)
+			{
+				write_CurrencyPair_fromCurrencyPairListToCombobox(comboBox_Coins, parrent.CurrencyNames);
+				AutoCompleteTextInComboBox(comboBox_Coins);
+				currencyPairLoadForDefaultList();
 			}
 
 		}

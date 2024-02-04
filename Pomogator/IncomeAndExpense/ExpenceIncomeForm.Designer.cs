@@ -31,6 +31,7 @@ namespace Pomogator
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.tableLayoutPanel_ExpenceIncomeGrig = new System.Windows.Forms.TableLayoutPanel();
 			this.lb_coinPair = new System.Windows.Forms.Label();
 			this.lb_Kind = new System.Windows.Forms.Label();
@@ -45,7 +46,7 @@ namespace Pomogator
 			this.lb_status = new System.Windows.Forms.Label();
 			this.lb_tag = new System.Windows.Forms.Label();
 			this.numericUpDown_numberLots = new System.Windows.Forms.NumericUpDown();
-			this.comboBox_CoinPair = new System.Windows.Forms.ComboBox();
+			this.comboBox_Coins = new System.Windows.Forms.ComboBox();
 			this.comboBox_positionStatus = new System.Windows.Forms.ComboBox();
 			this.tb_tag = new System.Windows.Forms.TextBox();
 			this.textBox_Income = new System.Windows.Forms.TextBox();
@@ -114,7 +115,7 @@ namespace Pomogator
 			this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
 			this.label_EndDateTitel = new System.Windows.Forms.Label();
 			this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
-			this.imageList1 = new System.Windows.Forms.ImageList();
+			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
 			this.statusStripExIncForm = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel_numberPositions = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabelBufferNow = new System.Windows.Forms.ToolStripStatusLabel();
@@ -169,7 +170,7 @@ namespace Pomogator
 			this.tableLayoutPanel_ExpenceIncomeGrig.Controls.Add(this.lb_status, 7, 0);
 			this.tableLayoutPanel_ExpenceIncomeGrig.Controls.Add(this.lb_tag, 8, 0);
 			this.tableLayoutPanel_ExpenceIncomeGrig.Controls.Add(this.numericUpDown_numberLots, 5, 1);
-			this.tableLayoutPanel_ExpenceIncomeGrig.Controls.Add(this.comboBox_CoinPair, 6, 1);
+			this.tableLayoutPanel_ExpenceIncomeGrig.Controls.Add(this.comboBox_Coins, 6, 1);
 			this.tableLayoutPanel_ExpenceIncomeGrig.Controls.Add(this.comboBox_positionStatus, 7, 1);
 			this.tableLayoutPanel_ExpenceIncomeGrig.Controls.Add(this.tb_tag, 8, 1);
 			this.tableLayoutPanel_ExpenceIncomeGrig.Controls.Add(this.textBox_Income, 3, 1);
@@ -320,16 +321,17 @@ namespace Pomogator
             0,
             0});
 			// 
-			// comboBox_CoinPair
+			// comboBox_Coins
 			// 
-			this.comboBox_CoinPair.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.comboBox_CoinPair.FormattingEnabled = true;
-			this.comboBox_CoinPair.Location = new System.Drawing.Point(1036, 16);
-			this.comboBox_CoinPair.Name = "comboBox_CoinPair";
-			this.comboBox_CoinPair.Size = new System.Drawing.Size(161, 21);
-			this.comboBox_CoinPair.TabIndex = 6;
-			this.comboBox_CoinPair.Text = "рубль";
-			this.comboBox_CoinPair.SelectedIndexChanged += new System.EventHandler(this.comboBox_CoinPair_SelectedIndexChanged);
+			this.comboBox_Coins.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.comboBox_Coins.FormattingEnabled = true;
+			this.comboBox_Coins.Location = new System.Drawing.Point(1036, 16);
+			this.comboBox_Coins.Name = "comboBox_Coins";
+			this.comboBox_Coins.Size = new System.Drawing.Size(161, 21);
+			this.comboBox_Coins.TabIndex = 6;
+			this.comboBox_Coins.Text = "рубль";
+			this.comboBox_Coins.DropDown += new System.EventHandler(this.comboBox_CoinPair_DropDown);
+			this.comboBox_Coins.SelectedIndexChanged += new System.EventHandler(this.comboBox_CoinPair_SelectedIndexChanged);
 			// 
 			// comboBox_positionStatus
 			// 
@@ -414,11 +416,13 @@ namespace Pomogator
 			// 
 			this.toolStripComboBox_DefaultCoin.Name = "toolStripComboBox_DefaultCoin";
 			this.toolStripComboBox_DefaultCoin.Size = new System.Drawing.Size(121, 23);
+			this.toolStripComboBox_DefaultCoin.DropDown += new System.EventHandler(this.comboBox_CoinPair_DropDown);
 			this.toolStripComboBox_DefaultCoin.TextChanged += new System.EventHandler(this.toolStripComboBox_DefaultCoin_TextChanged);
 			// 
 			// toolStripTextBox_search
 			// 
 			this.toolStripTextBox_search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.toolStripTextBox_search.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.toolStripTextBox_search.Name = "toolStripTextBox_search";
 			this.toolStripTextBox_search.Size = new System.Drawing.Size(200, 23);
 			this.toolStripTextBox_search.Enter += new System.EventHandler(this.toolStripTextBox_search_Enter);
@@ -1239,7 +1243,7 @@ namespace Pomogator
 		private SplitContainer splitContainer1;
 		private GroupBox groupBox_notes;
 		private NumericUpDown numericUpDown_numberLots;
-		private ComboBox comboBox_CoinPair;
+		private ComboBox comboBox_Coins;
 		private ComboBox comboBox_positionStatus;
 		private TextBox tb_tag;
 		private TextBox textBox_Income;

@@ -14,7 +14,6 @@ namespace Pomogator
 	partial class ExpenceIncomeForm
 	{
 		//Блок вспомогательных переменных
-		Pomogator_MainForm parrent;
 		SourceCode source;
 		DB_Provider provider;
 
@@ -110,15 +109,15 @@ namespace Pomogator
 			}
 		}
 
-		public void write_CurrencyPair_fromCurrencyPairListToCombobox(ComboBox _combo, List<CurrencyPair> _data)
+		public void write_CurrencyPair_fromCurrencyPairListToCombobox(ComboBox _combo, List<Currency> _data)
 		{
 			_combo.Items.Clear();
 			_combo.Text = "";
 			foreach (var item in _data)
 			{
-				if (!_combo.Items.Contains(item.shortPairName))
+				if (!_combo.Items.Contains(item.shortCurrencyName))
 				{
-					_combo.Items.Add(item.shortPairName);
+					_combo.Items.Add(item.shortCurrencyName);
 				}
 			}
 			_combo.Text = _combo.Items[0].ToString();
@@ -155,7 +154,7 @@ namespace Pomogator
 			textBox_Income.Text = "0";
 			textBox_Expence.Text = "0";
 			numericUpDown_numberLots.Value = 1;
-			comboBox_CoinPair.Text = comboBox_CoinPair.Items[0].ToString();
+			comboBox_Coins.Text = comboBox_Coins.Items[0].ToString();
 			comboBox_positionStatus.Text = comboBox_positionStatus.Items[0].ToString();
 			tb_tag.Text = "";
 			textBox_notes.Text = "";
@@ -242,9 +241,9 @@ namespace Pomogator
 		void currencyPairLoadForDefaultList()
 		{
 			toolStripComboBox_DefaultCoin.Items.Clear();
-			foreach (var item in parrent.CurrencyPairs)
+			foreach (var item in parrent.CurrencyNames)
 			{
-				toolStripComboBox_DefaultCoin.Items.Add(item.shortPairName);
+				toolStripComboBox_DefaultCoin.Items.Add(item.shortCurrencyName);
 			}
 			toolStripComboBox_DefaultCoin.Text = parrent.mainIni.defaultCoin;	
 		}
@@ -300,11 +299,11 @@ namespace Pomogator
 			//	(DateTime.Now.Month == 11) ? "ноябрь" :
 			//	"декабрь");
 
-			toolStripStatusLabelMonthExpence.Text += "   " + periodExpence(_posList) + "   " + comboBox_CoinPair.Text; ;
+			toolStripStatusLabelMonthExpence.Text += "   " + periodExpence(_posList) + "   " + comboBox_Coins.Text; ;
 			toolStripStatusLabelMonthExpence.ForeColor = Color.Red;
-			toolStripStatusLabel_MonthIncome.Text += "   " + periodIncome(_posList) + "   " + comboBox_CoinPair.Text; ;
+			toolStripStatusLabel_MonthIncome.Text += "   " + periodIncome(_posList) + "   " + comboBox_Coins.Text; ;
 			toolStripStatusLabel_MonthIncome.ForeColor = Color.Green;
-			toolStripStatusLabel_MonthSaldo.Text = "\t\t|   САЛЬДО:   " + (periodIncome(_posList) - periodExpence(_posList)) + "   " + comboBox_CoinPair.Text;
+			toolStripStatusLabel_MonthSaldo.Text = "\t\t|   САЛЬДО:   " + (periodIncome(_posList) - periodExpence(_posList)) + "   " + comboBox_Coins.Text;
 			if ((periodIncome(_posList) - periodExpence(_posList)) > 0)
 			{
 				toolStripStatusLabel_MonthSaldo.ForeColor = Color.Green;
@@ -324,7 +323,7 @@ namespace Pomogator
 			decimal tempIncome = 0;
 			foreach (var item in _posList)
 			{
-				if (item.currCoin == comboBox_CoinPair.Text)
+				if (item.currCoin == comboBox_Coins.Text)
 					tempIncome += item.income;
 			}
 			return tempIncome;
@@ -334,7 +333,7 @@ namespace Pomogator
 			decimal tempExpence = 0;
 			foreach (var item in _posList)
 			{
-				if (item.currCoin == comboBox_CoinPair.Text)
+				if (item.currCoin == comboBox_Coins.Text)
 					tempExpence += item.expence;
 			}
 			return tempExpence;

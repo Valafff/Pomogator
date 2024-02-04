@@ -2,6 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,10 +73,10 @@ namespace Pomogator
 			}
 			else
 			{
-                //было
-                //return new DateTime(9999, 12, 31);
-                //Console.WriteLine(DateTime.MaxValue);
-                return DateTime.MaxValue;
+				//было
+				//return new DateTime(9999, 12, 31);
+				//Console.WriteLine(DateTime.MaxValue);
+				return DateTime.MaxValue;
 
 			}
 		}
@@ -92,10 +93,10 @@ namespace Pomogator
 					pEIForm.lb_IDInfo.Text = pEIForm.bufferPosition.myKey.ToString();
 					// openDate
 					pEIForm.lb_dateOpenInfo.Text = pEIForm.bufferPosition.openDate.ToString();
-                    //CloseDate
-                    //было
-                    //if (pEIForm.bufferPosition.closeDate.ToString() != "01.01.0001 0:00:00")
-                    if (pEIForm.bufferPosition.closeDate != DateTime.MinValue)
+					//CloseDate
+					//было
+					//if (pEIForm.bufferPosition.closeDate.ToString() != "01.01.0001 0:00:00")
+					if (pEIForm.bufferPosition.closeDate != DateTime.MinValue)
 					{
 						pEIForm.lb_closeDateInfo.Text = pEIForm.bufferPosition.closeDate.ToString();
 					}
@@ -253,32 +254,75 @@ namespace Pomogator
 		public object Clone() => MemberwiseClone();
 	}
 	//Хранение пар валют из БД расходы/приходы
-	public class CurrencyPair
+	public class Currency : INotifyPropertyChanged
 	{
-		public uint key { get; set; }
-		public DateTime addDate { get; set; }
-		public string currencyPairName { get; set; }
-		public string shortPairName { get; set; }
-		public string currency_1 { get; set; }
-		public string currency_2 { get; set; }
-		public decimal ratio { get; set; }
+		uint KEY;
+		public uint key
+		{
+			get => KEY;
+			set
+			{
+				KEY = value;
+				ChangeProperty("KEY");
+			}
+		}
+		DateTime DATE;
+		public DateTime date
+		{
+			get => DATE;
+			set
+			{
+				DATE = value;
+				ChangeProperty("DATE");
+			}
+		}
 
-		public CurrencyPair() { }
+		string NAME;
+		public string currencyName
+		{
+			get => NAME;
+			set
+			{
+				NAME = value;
+				ChangeProperty("NAME");
+			}
+		}
+		string SHNAME;
+		public string shortCurrencyName
+		{
+			get => SHNAME;
+			set
+			{
+				SHNAME = value;
+				ChangeProperty("SHNAME");
+			}
+		}
 
-		public CurrencyPair(uint _key, DateTime _addDate, string _currencyPairName, string _shortPairName, string _currency_1, string _currency_2, decimal _ratio)
+
+
+
+
+		public Currency() { }
+
+		public Currency(uint _key, DateTime _addDate, string _currencyName, string _shortCurrencyName)
 		{
 			key = _key;
-			addDate = _addDate;
-			currencyPairName = _currencyPairName;
-			shortPairName = _shortPairName;
-			currency_1 = _currency_1;
-			currency_2 = _currency_2;
-			ratio = _ratio;
+			date = _addDate;
+			currencyName = _currencyName;
+			shortCurrencyName = _shortCurrencyName;
 		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		void ChangeProperty(string property)
+		{
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs(property));
+		}
+
 
 		public override string ToString()
 		{
-			return $"Дата доб/обнов: {addDate.ToShortDateString()}\t Имя пары/валюты: {currencyPairName}\t Курс: {ratio}";
+			return $"Дата доб/обнов: {date.ToShortDateString()}\t  |  Название валюты: {currencyName}  |  Короткое название: {shortCurrencyName}";
 		}
 	}
 }

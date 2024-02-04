@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pomogator.MainForm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,10 +29,12 @@ namespace Pomogator
 
 		//Объявление и инициализация формы приход/расход для исключения множественного открытия
 		public ExpenceIncomeForm eiF = null;
+		//Объявление и инициализация формы редактирования валют
+		public EditDBCoinsForm editDBCoinsForm = null;
 
 		//Объявление базовых списков переменных(классы в файле SourceCode.cs)
 		public List<IncomeExpenceData> IncomeExpenceData = new List<IncomeExpenceData>();
-		public List<CurrencyPair> CurrencyPairs = new List<CurrencyPair>();
+		public List<Currency> CurrencyNames = new List<Currency>();
 		//Класс Position хранится в файле Position.cs
 		public List<Position> Positions = new List<Position>();
 		public uint maxMyKey;
@@ -76,7 +79,7 @@ namespace Pomogator
 						MessageBox.Show("Ошибка чтения данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						return;
 					}
-
+					if (testconnection) { provider.closeConnection(); }
 					eiF = new ExpenceIncomeForm(this);
 					eiF.MdiParent = this;
 					eiF.Show();
@@ -85,8 +88,8 @@ namespace Pomogator
 				{
 					MessageBox.Show("Пароль не принят, в доступе отказано");
 				}
-				if (testconnection)
-					provider.closeConnection();
+				//if (testconnection)
+				//	provider.closeConnection();
 			}
 		}
 
@@ -160,6 +163,41 @@ namespace Pomogator
 
 
 
+		}
+
+		private void editCoinsDBToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+			PassForm pf = new PassForm(this);
+			pf.StartPosition = FormStartPosition.CenterScreen;
+			pf.ShowDialog();
+
+			// sender StripMenu Item, e - клик мыши
+			if (editDBCoinsForm == null)
+			{
+				bool testconnection = provider.openConnection(password, mainIni.pathDB);
+				if (pf.DialogResult == DialogResult.OK && testconnection)
+				{
+					Position p = provider.GetPosition(provider.getMyKeyMax());
+					if (p == null)
+					{
+						MessageBox.Show("Ошибка чтения данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
+					if (testconnection) { provider.closeConnection(); }
+
+					editDBCoinsForm = new EditDBCoinsForm(this);
+					editDBCoinsForm.MdiParent = this;
+					editDBCoinsForm.Show();
+				}
+				else if (pf.DialogResult == DialogResult.OK && !testconnection)
+				{
+					MessageBox.Show("Пароль не принят, в доступе отказано");
+				}
+
+			}
+			//EditDBCoinsForm editDBCoinsForm = new EditDBCoinsForm(this);
+			//editDBCoinsForm.Show();
 		}
 	}
 }

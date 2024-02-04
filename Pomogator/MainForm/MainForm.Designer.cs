@@ -40,10 +40,10 @@
 			this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.задатьПутьБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.настроитьPINКодToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.созданиеРезервнойКопииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.настроитьОбменныеКурсыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolStripMenuItem_importBD_v1_07 = new System.Windows.Forms.ToolStripMenuItem();
-			this.созданиеРезервнойКопииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.настроитьPINКодToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -126,10 +126,10 @@
 			// 
 			this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.задатьПутьБДToolStripMenuItem,
-            this.настроитьPINКодToolStripMenuItem,
+            this.созданиеРезервнойКопииToolStripMenuItem,
             this.настроитьОбменныеКурсыToolStripMenuItem,
             this.ToolStripMenuItem_importBD_v1_07,
-            this.созданиеРезервнойКопииToolStripMenuItem});
+            this.настроитьPINКодToolStripMenuItem});
 			this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
 			this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
 			this.настройкиToolStripMenuItem.Text = "Настройки";
@@ -141,17 +141,19 @@
 			this.задатьПутьБДToolStripMenuItem.Text = "Задать путь БД";
 			this.задатьПутьБДToolStripMenuItem.Click += new System.EventHandler(this.задатьПутьБДToolStripMenuItem_Click);
 			// 
-			// настроитьPINКодToolStripMenuItem
+			// созданиеРезервнойКопииToolStripMenuItem
 			// 
-			this.настроитьPINКодToolStripMenuItem.Name = "настроитьPINКодToolStripMenuItem";
-			this.настроитьPINКодToolStripMenuItem.Size = new System.Drawing.Size(347, 22);
-			this.настроитьPINКодToolStripMenuItem.Text = "Задать PIN-код (по умолчанию PIN-код - пароль)";
+			this.созданиеРезервнойКопииToolStripMenuItem.Name = "созданиеРезервнойКопииToolStripMenuItem";
+			this.созданиеРезервнойКопииToolStripMenuItem.Size = new System.Drawing.Size(347, 22);
+			this.созданиеРезервнойКопииToolStripMenuItem.Text = "Создание резервной копии БД";
+			this.созданиеРезервнойКопииToolStripMenuItem.Click += new System.EventHandler(this.созданиеРезервнойКопииToolStripMenuItem_Click);
 			// 
 			// настроитьОбменныеКурсыToolStripMenuItem
 			// 
 			this.настроитьОбменныеКурсыToolStripMenuItem.Name = "настроитьОбменныеКурсыToolStripMenuItem";
 			this.настроитьОбменныеКурсыToolStripMenuItem.Size = new System.Drawing.Size(347, 22);
-			this.настроитьОбменныеКурсыToolStripMenuItem.Text = "Настроить обменные курсы";
+			this.настроитьОбменныеКурсыToolStripMenuItem.Text = "Редактировать БД валют";
+			this.настроитьОбменныеКурсыToolStripMenuItem.Click += new System.EventHandler(this.editCoinsDBToolStripMenuItem_Click);
 			// 
 			// ToolStripMenuItem_importBD_v1_07
 			// 
@@ -160,12 +162,11 @@
 			this.ToolStripMenuItem_importBD_v1_07.Text = "Импорт БД v1.07";
 			this.ToolStripMenuItem_importBD_v1_07.Click += new System.EventHandler(this.ToolStripMenuItem_importBD_v1_07_Click);
 			// 
-			// созданиеРезервнойКопииToolStripMenuItem
+			// настроитьPINКодToolStripMenuItem
 			// 
-			this.созданиеРезервнойКопииToolStripMenuItem.Name = "созданиеРезервнойКопииToolStripMenuItem";
-			this.созданиеРезервнойКопииToolStripMenuItem.Size = new System.Drawing.Size(347, 22);
-			this.созданиеРезервнойКопииToolStripMenuItem.Text = "Создание резервной копии БД";
-			this.созданиеРезервнойКопииToolStripMenuItem.Click += new System.EventHandler(this.созданиеРезервнойКопииToolStripMenuItem_Click);
+			this.настроитьPINКодToolStripMenuItem.Name = "настроитьPINКодToolStripMenuItem";
+			this.настроитьPINКодToolStripMenuItem.Size = new System.Drawing.Size(347, 22);
+			this.настроитьPINКодToolStripMenuItem.Text = "Задать PIN-код (по умолчанию PIN-код - пароль)";
 			// 
 			// оПрограммеToolStripMenuItem
 			// 
