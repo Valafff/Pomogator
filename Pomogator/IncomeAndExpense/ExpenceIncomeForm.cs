@@ -138,7 +138,13 @@ namespace Pomogator
 		//Ввод десятичной дроби
 		private void textBox_Income_KeyPress(object sender, KeyPressEventArgs e)
 		{
+			//Замена точки на запятую для ввода с разных раскладок
 			KeyboardChar = e.KeyChar;
+			if (e.KeyChar == '.')
+			{
+				e.KeyChar = ',';
+			}
+
 			//if (!(Char.IsDigit(e.KeyChar)) && !((e.KeyChar == '.') && (textBox_Income.Text.IndexOf(".") == -1) && (textBox_Income.Text.Length != 0)))
 			//{
 			//	if (e.KeyChar != (char)Keys.Back)
@@ -156,25 +162,25 @@ namespace Pomogator
 			}
 		}
 
-		//Ввод десятичной дроби
+		//Ввод десятичной дроби ОТКЛЮЧЕНО
 		private void textBox_Expence_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			KeyboardChar = e.KeyChar;
-			//if (!(Char.IsDigit(e.KeyChar)) && !((e.KeyChar == '.') && (textBox_Income.Text.IndexOf(".") == -1) && (textBox_Income.Text.Length != 0)))
+			//KeyboardChar = e.KeyChar;
+			////if (!(Char.IsDigit(e.KeyChar)) && !((e.KeyChar == '.') && (textBox_Income.Text.IndexOf(".") == -1) && (textBox_Income.Text.Length != 0)))
+			////{
+			////	if (e.KeyChar != (char)Keys.Back)
+			////	{
+			////		e.Handled = true;
+			////	}
+			////}
+
+			//if (!(Char.IsDigit(e.KeyChar)) && !((e.KeyChar == ',') && (textBox_Expence.Text.IndexOf(",") == -1) && (textBox_Expence.Text.Length != 0)))
 			//{
 			//	if (e.KeyChar != (char)Keys.Back)
 			//	{
 			//		e.Handled = true;
 			//	}
 			//}
-
-			if (!(Char.IsDigit(e.KeyChar)) && !((e.KeyChar == ',') && (textBox_Expence.Text.IndexOf(",") == -1) && (textBox_Expence.Text.Length != 0)))
-			{
-				if (e.KeyChar != (char)Keys.Back)
-				{
-					e.Handled = true;
-				}
-			}
 		}
 
 		private void btn_writePosition_Click(object sender, EventArgs e)
