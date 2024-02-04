@@ -77,26 +77,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DB_Provider.cs" />
-    <Compile Include="ExpenceIncomeForm.cs">
+    <Compile Include="Source\DB_Provider.cs" />
+    <Compile Include="IncomeAndExpense\ExpenceIncomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExpenceIncomeForm.Designer.cs">
+    <Compile Include="IncomeAndExpense\ExpenceIncomeForm.Designer.cs">
       <DependentUpon>ExpenceIncomeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExpIncFormSource.cs">
+    <Compile Include="IncomeAndExpense\ExpIncFormSource.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="MainForm\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="MainForm\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainFormImportDB_1_07.cs">
+    <Compile Include="MainForm\MainFormImportDB_1_07.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainInitialization.cs">
+    <Compile Include="MainForm\MainInitialization.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PassForm.cs">
@@ -105,8 +105,8 @@
     <Compile Include="PassForm.Designer.cs">
       <DependentUpon>PassForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Position.cs" />
-    <Compile Include="SourceCode.cs" />
+    <Compile Include="Source\Position.cs" />
+    <Compile Include="Source\SourceCode.cs" />
     <Compile Include="startMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,10 +115,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ExpenceIncomeForm.resx">
+    <EmbeddedResource Include="IncomeAndExpense\ExpenceIncomeForm.resx">
       <DependentUpon>ExpenceIncomeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PassForm.resx">

@@ -31,7 +31,6 @@ namespace Pomogator
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.tableLayoutPanel_ExpenceIncomeGrig = new System.Windows.Forms.TableLayoutPanel();
 			this.lb_coinPair = new System.Windows.Forms.Label();
 			this.lb_Kind = new System.Windows.Forms.Label();
@@ -115,7 +114,7 @@ namespace Pomogator
 			this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
 			this.label_EndDateTitel = new System.Windows.Forms.Label();
 			this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
-			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+			this.imageList1 = new System.Windows.Forms.ImageList();
 			this.statusStripExIncForm = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel_numberPositions = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabelBufferNow = new System.Windows.Forms.ToolStripStatusLabel();
